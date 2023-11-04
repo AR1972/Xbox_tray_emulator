@@ -21,10 +21,10 @@
 #define CLOSED 1
 #define OPEN 0
 #define NEJECT_PIN PB0
-#define TRAY_OUT_PIN PB1
-#define TRAY_IN_PIN PB2
-#define SER_DATA_PIN PB3
-#define CD_RDY_PIN PB4
+#define CD_RDY_PIN PB1
+#define SER_DATA_PIN PB2
+#define TRAY_IN_PIN PB3
+#define TRAY_OUT_PIN PB4
 #define STATUS_LED PB5
 
 // optional LED, reset must be disabled via fuse
@@ -86,7 +86,7 @@ ISR(PCINT0_vect)
 			{
 				// if tray is closed emulate the tray opening
 				digitalWrite(TRAY_IN_PIN, LOW);
-				delay(1000);
+				delay(100);
 				digitalWrite(CD_RDY_PIN, HIGH);
 #ifdef USE_LED
 				// optional LED, reset must be disabled via fuse
@@ -100,7 +100,7 @@ ISR(PCINT0_vect)
 				// if tray is open emulate the tray closing
 				digitalWrite(TRAY_OUT_PIN, LOW);
 				digitalWrite(CD_RDY_PIN, LOW);
-				delay(1000);
+				delay(100);
 #ifdef USE_LED
 				// optional LED, reset must be disabled via fuse
 				digitalWrite(STATUS_LED, LOW);
