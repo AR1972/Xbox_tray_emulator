@@ -86,7 +86,7 @@ ISR(PCINT0_vect)
 			{
 				// if tray is closed emulate the tray opening
 				digitalWrite(TRAY_IN_PIN, LOW);
-				delay(100);
+				delay(1000);
 				digitalWrite(CD_RDY_PIN, HIGH);
 #ifdef USE_LED
 				// optional LED, reset must be disabled via fuse
@@ -100,7 +100,7 @@ ISR(PCINT0_vect)
 				// if tray is open emulate the tray closing
 				digitalWrite(TRAY_OUT_PIN, LOW);
 				digitalWrite(CD_RDY_PIN, LOW);
-				delay(100);
+				delay(1000);
 #ifdef USE_LED
 				// optional LED, reset must be disabled via fuse
 				digitalWrite(STATUS_LED, LOW);
