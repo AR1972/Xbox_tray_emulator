@@ -37,12 +37,13 @@ void setup()
 {
 	// disable intrrupts
 	cli();
-
+	// ADC off
+	ADCSRA &= ~(1<<ADEN);
 	// setup pin 5 as our interrupt pin
 	GIMSK |= _BV(PCIE);
 	PCMSK |= _BV(NEJECT_PIN);
 	pinMode(NEJECT_PIN, INPUT_PULLUP);
-
+	// setup output
 	pinMode(TRAY_OUT_PIN, OUTPUT);
 	pinMode(TRAY_IN_PIN, OUTPUT);
 	pinMode(SER_DATA_PIN, OUTPUT);
