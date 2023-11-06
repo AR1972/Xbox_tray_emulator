@@ -17,6 +17,7 @@
 #include <Arduino.h>
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
+#include <avr/power.h>
 
 #define CLOSED 1
 #define OPEN 0
@@ -38,7 +39,7 @@ void setup()
 	// disable intrrupts
 	cli();
 	// ADC off
-	ADCSRA &= ~(1<<ADEN);
+	ADCSRA &= ~(1 << ADEN);
 	// setup pin 5 as our interrupt pin
 	GIMSK |= _BV(PCIE);
 	PCMSK |= _BV(NEJECT_PIN);
@@ -48,31 +49,35 @@ void setup()
 	pinMode(TRAY_IN_PIN, OUTPUT);
 	pinMode(SER_DATA_PIN, OUTPUT);
 	pinMode(CD_RDY_PIN, OUTPUT);
-
-#ifdef USE_LED
-	// optional LED, reset must be disabled via fuse
-	pinMode(STATUS_LED, OUTPUT);
-#endif
-
 	// setup as tray closed no disc in drive
 	digitalWrite(TRAY_OUT_PIN, LOW);
 	digitalWrite(TRAY_IN_PIN, HIGH);
 	digitalWrite(CD_RDY_PIN, LOW);
 	// terminate SER_DATA to avoid possible issues
 	digitalWrite(SER_DATA_PIN, LOW);
-#ifdef USE_LED
-	// optional LED, reset must be disabled via fuse
-	digitalWrite(STATUS_LED, LOW);
-#endif
 	// enable interrupts
 	sei();
 }
 
 void sleep()
 {
+	ACSR = ADMUX = ADCSRA = 0;
+	// Analog comparator off
+	ACSR |= (1 << ACD);
+	// switch Analog to Digitalconverter off
+	ADCSRA &= ~(1 << ADEN);
 	set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+	power_all_disable();
 	sleep_enable();
+	cli();
+	// Disable BOD, step 1
+	BODCR = (1 << BODSE) | (1 << BODS);
+	// Second step
+	BODCR = (1 << BODS);
+	sei();
 	sleep_cpu();
+	sleep_disable();
+	power_all_enable();
 }
 
 ISR(PCINT0_vect)
@@ -89,10 +94,6 @@ ISR(PCINT0_vect)
 				digitalWrite(TRAY_IN_PIN, LOW);
 				delay(1000);
 				digitalWrite(CD_RDY_PIN, HIGH);
-#ifdef USE_LED
-				// optional LED, reset must be disabled via fuse
-				digitalWrite(STATUS_LED, HIGH);
-#endif
 				digitalWrite(TRAY_OUT_PIN, HIGH);
 				tray_status = OPEN;
 			}
@@ -102,10 +103,6 @@ ISR(PCINT0_vect)
 				digitalWrite(TRAY_OUT_PIN, LOW);
 				digitalWrite(CD_RDY_PIN, LOW);
 				delay(1000);
-#ifdef USE_LED
-				// optional LED, reset must be disabled via fuse
-				digitalWrite(STATUS_LED, LOW);
-#endif
 				digitalWrite(TRAY_IN_PIN, HIGH);
 				tray_status = CLOSED;
 			}
