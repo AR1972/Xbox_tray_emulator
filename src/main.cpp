@@ -43,7 +43,7 @@ void setup()
 	// setup pin 5 as our interrupt pin
 	GIMSK |= _BV(PCIE);
 	PCMSK |= _BV(NEJECT_PIN);
-	pinMode(NEJECT_PIN, INPUT_PULLUP);
+	pinMode(NEJECT_PIN, INPUT);
 	// setup output
 	pinMode(TRAY_OUT_PIN, OUTPUT);
 	pinMode(TRAY_IN_PIN, OUTPUT);
@@ -92,9 +92,12 @@ ISR(PCINT0_vect)
 			{
 				// if tray is closed emulate the tray opening
 				digitalWrite(TRAY_IN_PIN, LOW);
-				delay(1000);
+				delay(100);
 				digitalWrite(CD_RDY_PIN, HIGH);
+				delay(700);
 				digitalWrite(TRAY_OUT_PIN, HIGH);
+				delay(100);
+				digitalWrite(CD_RDY_PIN, LOW);
 				tray_status = OPEN;
 			}
 			else
