@@ -26,10 +26,6 @@
 #define SER_DATA_PIN PB2
 #define TRAY_IN_PIN PB3
 #define TRAY_OUT_PIN PB4
-#define STATUS_LED PB5
-
-// optional LED, reset must be disabled via fuse
-// #define USE_LED
 
 volatile bool tray_status = CLOSED;
 volatile bool busy = false;
