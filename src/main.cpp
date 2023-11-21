@@ -80,18 +80,18 @@ ISR(PCINT0_vect)
 {
 	if (!busy)
 	{
+		busy = true;
 		// NEJECT pin is normaly high only respond when pin changes to low
 		if (!digitalRead(NEJECT_PIN))
 		{
-			busy = true;
 			if (tray_status == CLOSED)
 			{
 				// if tray is closed emulate the tray opening
-				digitalWrite(TRAY_IN_PIN, LOW);
 				digitalWrite(CD_RDY_PIN, HIGH);
+				digitalWrite(TRAY_IN_PIN, LOW);
 				delay(1000);
 				digitalWrite(TRAY_OUT_PIN, HIGH);
-				delay(500);
+				delay(1000);
 				digitalWrite(CD_RDY_PIN, LOW);
 				tray_status = OPEN;
 			}
