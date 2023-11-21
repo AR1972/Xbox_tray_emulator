@@ -88,20 +88,22 @@ ISR(PCINT0_vect)
 			{
 				// if tray is closed emulate the tray opening
 				digitalWrite(TRAY_IN_PIN, LOW);
-				delay(100);
 				digitalWrite(CD_RDY_PIN, HIGH);
-				delay(700);
+				delay(1000);
 				digitalWrite(TRAY_OUT_PIN, HIGH);
-				delay(100);
+				delay(500);
 				digitalWrite(CD_RDY_PIN, LOW);
 				tray_status = OPEN;
 			}
 			else
 			{
 				// if tray is open emulate the tray closing
-				digitalWrite(TRAY_OUT_PIN, LOW);
 				digitalWrite(CD_RDY_PIN, LOW);
+				digitalWrite(TRAY_IN_PIN, HIGH);
 				delay(1000);
+				digitalWrite(TRAY_OUT_PIN, LOW);
+				digitalWrite(TRAY_IN_PIN, LOW);
+				delay(2000);
 				digitalWrite(TRAY_IN_PIN, HIGH);
 				tray_status = CLOSED;
 			}
