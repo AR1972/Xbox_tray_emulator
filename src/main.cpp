@@ -28,14 +28,13 @@
 #define TRAY_OUT_PIN PB4
 
 volatile bool tray_status = CLOSED;
-volatile bool busy = false;
 
 void setup()
 {
 	// disable intrrupts
 	cli();
 	// ADC off
-	ADCSRA &= ~(1 << ADEN);
+	ADCSRA &= ~_BV(ADEN);
 	// setup pin 5 as our interrupt pin
 	GIMSK |= _BV(PCIE);
 	PCMSK |= _BV(NEJECT_PIN);
@@ -59,17 +58,17 @@ void sleep()
 {
 	ACSR = ADMUX = ADCSRA = 0;
 	// Analog comparator off
-	ACSR |= (1 << ACD);
+	ACSR |= _BV(ACD);
 	// switch Analog to Digitalconverter off
-	ADCSRA &= ~(1 << ADEN);
+	ADCSRA &= ~_BV(ADEN);
 	set_sleep_mode(SLEEP_MODE_PWR_DOWN);
 	power_all_disable();
 	sleep_enable();
 	cli();
 	// Disable BOD, step 1
-	BODCR = (1 << BODSE) | (1 << BODS);
+	BODCR = _BV(BODSE) | _BV(BODS);
 	// Second step
-	BODCR = (1 << BODS);
+	BODCR = _BV(BODS);
 	sei();
 	sleep_cpu();
 	sleep_disable();
@@ -78,38 +77,35 @@ void sleep()
 
 ISR(PCINT0_vect)
 {
-	if (!busy)
+	GIMSK &= ~_BV(PCIE);
+	// NEJECT pin is normaly high only respond when pin changes to low
+	if (!digitalRead(NEJECT_PIN))
 	{
-		busy = true;
-		// NEJECT pin is normaly high only respond when pin changes to low
-		if (!digitalRead(NEJECT_PIN))
+		if (tray_status == CLOSED)
 		{
-			if (tray_status == CLOSED)
-			{
-				// if tray is closed emulate the tray opening
-				digitalWrite(CD_RDY_PIN, HIGH);
-				digitalWrite(TRAY_IN_PIN, LOW);
-				delay(1000);
-				digitalWrite(TRAY_OUT_PIN, HIGH);
-				delay(1000);
-				digitalWrite(CD_RDY_PIN, LOW);
-				tray_status = OPEN;
-			}
-			else
-			{
-				// if tray is open emulate the tray closing
-				digitalWrite(CD_RDY_PIN, LOW);
-				digitalWrite(TRAY_IN_PIN, HIGH);
-				delay(1000);
-				digitalWrite(TRAY_OUT_PIN, LOW);
-				digitalWrite(TRAY_IN_PIN, LOW);
-				delay(2000);
-				digitalWrite(TRAY_IN_PIN, HIGH);
-				tray_status = CLOSED;
-			}
+			// if tray is closed emulate the tray opening
+			digitalWrite(CD_RDY_PIN, HIGH);
+			digitalWrite(TRAY_IN_PIN, LOW);
+			delay(1000);
+			digitalWrite(TRAY_OUT_PIN, HIGH);
+			delay(1000);
+			digitalWrite(CD_RDY_PIN, LOW);
+			tray_status = OPEN;
 		}
-		busy = false;
+		else
+		{
+			// if tray is open emulate the tray closing
+			digitalWrite(CD_RDY_PIN, LOW);
+			digitalWrite(TRAY_IN_PIN, HIGH);
+			delay(1000);
+			digitalWrite(TRAY_OUT_PIN, LOW);
+			digitalWrite(TRAY_IN_PIN, LOW);
+			delay(2000);
+			digitalWrite(TRAY_IN_PIN, HIGH);
+			tray_status = CLOSED;
+		}
 	}
+	GIMSK |= _BV(PCIE);
 }
 
 void loop()
