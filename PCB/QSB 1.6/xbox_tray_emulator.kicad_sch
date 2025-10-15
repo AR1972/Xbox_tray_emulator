@@ -1164,16 +1164,16 @@
 		(uuid "d28e5e59-d0f8-4887-a713-d142448c8207")
 	)
 	(no_connect
-		(at 175.26 142.24)
-		(uuid "6bfd63f7-6b7b-4595-8cc3-5ce890136a61")
+		(at 175.26 132.08)
+		(uuid "1df1893a-ac65-4bb9-aa5a-b8d33b83d7b7")
 	)
 	(no_connect
 		(at 175.26 127)
 		(uuid "d400ebf0-69c9-4778-b5f3-3fae8020114f")
 	)
 	(no_connect
-		(at 175.26 132.08)
-		(uuid "e94ca881-9919-4ae4-b7e1-24bbd2da8f31")
+		(at 175.26 142.24)
+		(uuid "f8ad0661-dfcd-4b9c-be39-ba7156a0c0f7")
 	)
 	(wire
 		(pts
@@ -1467,16 +1467,6 @@
 	)
 	(wire
 		(pts
-			(xy 171.45 142.24) (xy 175.26 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9c4cac9d-e3b1-4ad7-94be-1fad3907599c")
-	)
-	(wire
-		(pts
 			(xy 167.64 92.71) (xy 157.48 92.71)
 		)
 		(stroke
@@ -1617,16 +1607,6 @@
 	)
 	(wire
 		(pts
-			(xy 171.45 132.08) (xy 175.26 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "db7d3c5f-7dd2-4f41-a846-e10146f3b0d8")
-	)
-	(wire
-		(pts
 			(xy 144.78 132.08) (xy 143.51 132.08)
 		)
 		(stroke
@@ -1705,18 +1685,8 @@
 		)
 		(uuid "1f26d400-a11b-4d9e-bd42-1400b694f23c")
 	)
-	(label "12V"
-		(at 171.45 132.08 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2300a221-f464-492f-9511-af38b6e63169")
-	)
 	(label "NEJECT"
-		(at 157.48 139.7 0)
+		(at 154.94 139.7 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1765,16 +1735,6 @@
 		)
 		(uuid "c4b0259c-ccfa-4be9-ada6-329423994e75")
 	)
-	(label "12V"
-		(at 171.45 142.24 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "eddad89e-fb92-49fb-94ac-ec8b11a830c5")
-	)
 	(label "TRAY_IN"
 		(at 179.07 134.62 0)
 		(effects
@@ -1786,7 +1746,7 @@
 		(uuid "f1e664f8-22d2-42a1-99bd-5649d6cca192")
 	)
 	(label "CD_RDY"
-		(at 158.75 137.16 0)
+		(at 156.21 137.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)
