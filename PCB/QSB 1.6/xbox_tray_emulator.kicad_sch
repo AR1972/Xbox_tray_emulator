@@ -1163,6 +1163,18 @@
 		(color 0 0 0 0)
 		(uuid "d28e5e59-d0f8-4887-a713-d142448c8207")
 	)
+	(no_connect
+		(at 175.26 142.24)
+		(uuid "6bfd63f7-6b7b-4595-8cc3-5ce890136a61")
+	)
+	(no_connect
+		(at 175.26 127)
+		(uuid "d400ebf0-69c9-4778-b5f3-3fae8020114f")
+	)
+	(no_connect
+		(at 175.26 132.08)
+		(uuid "e94ca881-9919-4ae4-b7e1-24bbd2da8f31")
+	)
 	(wire
 		(pts
 			(xy 186.69 102.87) (xy 186.69 134.62)
@@ -1455,6 +1467,16 @@
 	)
 	(wire
 		(pts
+			(xy 171.45 142.24) (xy 175.26 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c4cac9d-e3b1-4ad7-94be-1fad3907599c")
+	)
+	(wire
+		(pts
 			(xy 167.64 92.71) (xy 157.48 92.71)
 		)
 		(stroke
@@ -1595,6 +1617,16 @@
 	)
 	(wire
 		(pts
+			(xy 171.45 132.08) (xy 175.26 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "db7d3c5f-7dd2-4f41-a846-e10146f3b0d8")
+	)
+	(wire
+		(pts
 			(xy 144.78 132.08) (xy 143.51 132.08)
 		)
 		(stroke
@@ -1643,25 +1675,125 @@
 		)
 		(uuid "f53d53cb-75de-49c0-97e8-a84e46cc17cc")
 	)
-	(label "Net-(R1-Pad1)"
-		(at 154.94 74.93 180)
+	(label "3V3"
+		(at 151.13 111.76 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
-		(uuid "ba3f68df-a80d-4363-9b28-2b49507e87bd")
+		(uuid "00822b97-6537-45c2-a382-0eb7bf79bfd1")
 	)
-	(label "Net-(J1-Pad10)"
-		(at 162.56 142.24 180)
+	(label "RSET"
+		(at 175.26 95.25 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
-		(uuid "d52775ee-dd56-474f-8b5c-c66029880e5c")
+		(uuid "0bb360ed-190b-4a8b-b7d4-9b4278d830a7")
+	)
+	(label "NC"
+		(at 175.26 127 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1f26d400-a11b-4d9e-bd42-1400b694f23c")
+	)
+	(label "12V"
+		(at 171.45 132.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2300a221-f464-492f-9511-af38b6e63169")
+	)
+	(label "NEJECT"
+		(at 157.48 139.7 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2759a71a-d175-4720-a8d8-abdb2d60b12e")
+	)
+	(label "5V"
+		(at 151.13 140.97 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2cdab78f-41e6-45c2-b08e-3094ca784cb4")
+	)
+	(label "TRAY_OUT"
+		(at 179.07 137.16 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "448fc274-5396-40d4-8050-40c9def516bb")
+	)
+	(label "GND"
+		(at 162.56 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6295b521-0a76-4b3f-b48b-94e51fb50d11")
+	)
+	(label "SER_DATA"
+		(at 157.48 134.62 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c4b0259c-ccfa-4be9-ada6-329423994e75")
+	)
+	(label "12V"
+		(at 171.45 142.24 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "eddad89e-fb92-49fb-94ac-ec8b11a830c5")
+	)
+	(label "TRAY_IN"
+		(at 179.07 134.62 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f1e664f8-22d2-42a1-99bd-5649d6cca192")
+	)
+	(label "CD_RDY"
+		(at 158.75 137.16 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f7250df3-7db8-4fa9-91ab-887764e29905")
 	)
 	(symbol
 		(lib_id "Regulator_Linear:AP2127N-3.3")
